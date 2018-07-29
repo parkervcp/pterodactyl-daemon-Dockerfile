@@ -2,9 +2,10 @@ version: '2'
 services:
   daemon:
     hostname: daemon
-    image: quay.io/parkervcp/pterodactyl-daemon:latest
+    image: quay.io/parkervcp/pterodactyl-daemon:0.5.X
     ports:
       - "8080:8080"
+      - "2022:2022"
     tty: true
     restart: always
     volumes:
