@@ -5,6 +5,7 @@ services:
     image: quay.io/parkervcp/pterodactyl-daemon:develop
     ports:
       - "8080:8080"
+      - "2022:2022"
     tty: true
     restart: always
     volumes:
