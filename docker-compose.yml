@@ -9,7 +9,7 @@ services:
     tty: true
     restart: always
     volumes:
-      ## don't toch these
+      ## don't touch these
       - "/var/run/docker.sock:/var/run/docker.sock" ## required to control docker from inside the container
       - "/var/lib/docker/containers/:/var/lib/docker/containers/" ## required to read docker logs in 0.6.X
       - "/tmp/pterodactyl/:/tmp/pterodactyl/" ## required for server installs
