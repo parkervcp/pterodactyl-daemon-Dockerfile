@@ -1,17 +1,18 @@
-FROM mhart/alpine-node:6.8
+FROM node:8-alpine
 
 MAINTAINER Michael Parker, <docker@parkervcp.com>
 
+ENV DAEMON_VERSION=v0.6.2
+
 WORKDIR /srv/daemon
 
-RUN apk update \
- && apk add openssl make gcc g++ python linux-headers paxctl gnupg zip unzip git \
- && git clone https://github.com/Pterodactyl/Daemon.git . \
+RUN apk add --no-cache curl openssl make gcc g++ python linux-headers paxctl gnupg tar zip unzip coreutils zlib \
+ && curl -sSL https://github.com/Pterodactyl/Daemon/releases/download/${DAEMON_VERSION}/daemon.tar.gz -o daemon.tar.gz \
+ && tar --strip-components=1 -xzvf daemon.tar.gz \
+ && rm daemon.tar.gz \
  && npm install --production \
- && apk del curl make gcc g++ python linux-headers paxctl gnupg tar ${DEL_PKGS} \
- && rm -rf /node-${VERSION}.tar.gz /SHASUMS256.txt.asc /node-${VERSION} ${RM_DIRS} \
- /usr/share/man /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp /root/.gnupg \
- /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html
+ && addgroup -S pterodactyl && adduser -S -D -H -G pterodactyl -s /bin/false pterodactyl \
+ && apk del --no-cache make gcc g++ python linux-headers paxctl gnupg
 
 EXPOSE 8080
 

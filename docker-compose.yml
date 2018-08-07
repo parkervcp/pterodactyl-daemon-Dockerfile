@@ -2,13 +2,25 @@ version: '2'
 services:
   ptero:
     hostname: daemon
-    image: quay.io/parkervcp/pterodactyl-daemon:develop
+    image: quay.io/parkervcp/pterodactyl-daemon:0.6.X
     ports:
       - "8080:8080"
       - "2022:2022"
     tty: true
     restart: always
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-      - "/srv/daemon/config/:/srv/daemon/config/"
-      - "/srv/daemon-data/:/srv/daemon-data/"
+      ## don't toch these
+      - "/var/run/docker.sock:/var/run/docker.sock" ## required to control docker from inside the container
+      - "/var/lib/docker/containers/:/var/lib/docker/containers/" ## required to read docker logs in 0.6.X
+      - "/tmp/pterodactyl/:/tmp/pterodactyl/" ## required for server installs
+      ## These are user configurable on the daemon. Edit to match
+      - "/srv/daemon/config/:/srv/daemon/config/" ## needed to store the config out of the containers This is a default location.
+      - "/srv/daemon-data/:/srv/daemon-data/" ## sftp compatability. Needs to be changed if you change it in the config
+      ## uncomment the following line if you have ssl certs set up with lets encrypt.
+      ## - "/etc/letsencrypt/:/etc/letsencrypt/" ## default location for certs.
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.19.0.0/16 ## so we don't overlap with the pterodactyl default network.
