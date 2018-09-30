@@ -1,8 +1,8 @@
-FROM node:8-alpine
+FROM node:10-alpine
 
 MAINTAINER Michael Parker, <docker@parkervcp.com>
 
-ENV DAEMON_VERSION=v0.6.5
+ENV DAEMON_VERSION=v0.6.7
 
 WORKDIR /srv/daemon
 
