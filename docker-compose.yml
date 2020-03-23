@@ -13,6 +13,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock" ## required to control docker from inside the container
       - "/var/lib/docker/containers/:/var/lib/docker/containers/" ## required to read docker logs in 0.6.X
       - "/tmp/pterodactyl/:/tmp/pterodactyl/" ## required for server installs
+      - "/etc/timezone:/etc/timezone:ro" ## fixes time zone issues
       ## These are user configurable on the daemon. Edit to match
       - "/srv/daemon/config/:/srv/daemon/config/" ## needed to store the config out of the containers This is a default location.
       - "/srv/daemon-data/:/srv/daemon-data/" ## sftp compatability. Needs to be changed if you change it in the config
