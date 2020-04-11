@@ -2,7 +2,7 @@ FROM node:10-alpine
 
 LABEL author="Michael Parker" email="docker@parkervcp.com"
 
-ENV DAEMON_VERSION=v0.6.12
+ENV DAEMON_VERSION=v0.6.13
 
 COPY . /srv/daemon
 
