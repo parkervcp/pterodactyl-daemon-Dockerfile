@@ -16,7 +16,7 @@ RUN apk add --no-cache curl openssl make gcc g++ python linux-headers paxctl gnu
  && npm install --production \
  && apk del --no-cache make gcc g++ python linux-headers paxctl gnupg \
  && mkdir -p /var/log/supervisord /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 \
- && curl -sSL https://github.com/pterodactyl/sftp-server/releases/download/v1.0.4/sftp-server > /srv/daemon/sftp-server \
+ && curl -sSL https://github.com/pterodactyl/sftp-server/releases/download/v1.0.5/sftp-server > /srv/daemon/sftp-server \
  && chmod +x /srv/daemon/sftp-server \
  && chmod +x /srv/daemon/entrypoint.sh \
  && cp /srv/daemon/supervisord.conf /etc/supervisord.conf
